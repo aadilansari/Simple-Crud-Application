@@ -1,0 +1,104 @@
+<div class="container mt-5">
+
+    <h1> CRUD APP </h1>
+    <hr>    
+
+    <div class="row">
+        <h3 class="mb-3"> Create new employee </h3>
+        <!-- <div class="col">
+          <input disabled [(ngModel)]="empCode" type="text" class="form-control" placeholder="Code">
+        </div> -->
+        <div class="col">
+            <input [(ngModel)]="empName" type="text" class="form-control" placeholder="Name">
+        </div>
+        <div class="col">
+            <input [(ngModel)]="empEmail" type="text" class="form-control" placeholder="Email">
+        </div>
+        <div class="col">
+            <input [(ngModel)]="empPost" type="text" class="form-control" placeholder="Post">
+        </div>
+        <div class="col">
+            <input [(ngModel)]="empSalary" type="text" class="form-control" placeholder="Salary">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" (click)="addEmployee()"> ADD </button>
+        </div>
+        
+    </div>
+
+    <hr class="my-5">
+    
+    <h3 class="mb-3"> Manage Employee </h3>
+    <p *ngIf="isAdded" class="alert alert-success"> Employee Added Successfully! </p>
+    <p *ngIf="isDeleted" class="alert alert-danger"> Employee Deleted Successfully! </p>
+
+    <table class="table table-primary ">
+        <thead>
+          <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Post</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let emp of employees; let i = index">
+            <th scope="row">{{emp.code}}</th>
+            <td>{{emp.name}}</td>
+            <td>{{emp.email}}</td>
+            <td>{{emp.post}}</td>
+            <td>{{emp.salary}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="editEmployee(emp, i)" data-bs-toggle="modal" data-bs-target="#editModal">
+                  Edit
+                </button>
+                <a (click)="deleteEmployee(i)"> Delete </a>
+            </td>
+          </tr>
+          
+        </tbody>
+    </table>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="editModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <h3 class="mb-3"> Create new employee </h3>
+            <!-- <div class="col">
+              <input disabled [(ngModel)]="empCode" type="text" class="form-control" placeholder="Code">
+            </div> -->
+           
+              <input [(ngModel)]="empCodeEdit" type="hidden" class="form-control" placeholder="Name">
+            <div class="col">
+                <input [(ngModel)]="empNameEdit" type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col">
+                <input [(ngModel)]="empEmailEdit" type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="col">
+                <input [(ngModel)]="empPostEdit" type="text" class="form-control" placeholder="Post">
+            </div>
+            <div class="col">
+                <input [(ngModel)]="empSalaryEdit" type="text" class="form-control" placeholder="Salary">
+            </div>           
+            
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateEmployee()">Update Employee</button>
+      </div>
+    </div>
+  </div>
+</div>
